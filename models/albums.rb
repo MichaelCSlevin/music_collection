@@ -29,4 +29,12 @@ class Album
       albums = SqlRunner.run(sql, "find_all_albums", values)
       return albums.map { |album| Album.new(album) }
     end
+
+    def get_album_artist
+      sql = "SELECT * FROM artists WHERE id = $1;"
+      values = [@artist_id]
+      results = SQLRunner.run(sql, "get_album_artist", values)
+      artist = results[0]
+      return Artist.new(artist)
+    end
 end
