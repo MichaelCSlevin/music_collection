@@ -19,6 +19,14 @@ class Artist
   values = [@name]
   result = SQLRunner.run(sql, "save_artist", values)
   @id = result[0]['id'].to_i()
-end
+  end
+
+  def self.list_all()
+    sql = "SELECT * FROM artists"
+    values = []
+    artists = SqlRunner.run(sql, "find_all_artists", values)
+    return artists.map { |artist| Artist.new(artist) }
+  end
+
 
 end

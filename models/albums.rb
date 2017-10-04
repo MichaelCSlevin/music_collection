@@ -9,4 +9,24 @@ class Album
     @genre = album_hash['album_genre']
   end
 
+  def save ()
+    sql = "INSERT INTO albums
+    (
+      album_name,
+      album_genre
+    ) VALUES
+    (
+      $1, $2, $3
+    )
+    RETURNING id;"
+    values = [@title, @genre]
+    @id = result[0]['id'].to_i()
+  end
+
+  def self.all()
+      sql = "SELECT * FROM albums"
+      values = []
+      albums = SqlRunner.run(sql, "find_all_albums", values)
+      return albums.map { |album| Album.new(album) }
+    end
 end
