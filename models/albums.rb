@@ -1,6 +1,6 @@
 class Album
 
-  attr_accessor :title :genre
+  attr_accessor :title, :genre
   attr_reader :id
 
   def initialize (album_hash)
@@ -8,3 +8,5 @@ class Album
     @title = album_hash['album_name']
     @genre = album_hash['album_genre']
   end
+
+end
